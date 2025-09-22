@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VPIES: Variational Privileged‑Information Encoder as Scaffold</title>
-  <meta name="description" content="VPIES: Variational Privileged‑Information Encoder as Scaffold for robust legged locomotion with zero‑privilege deployment." />
-  <meta property="og:title" content="VPIES: Variational Privileged‑Information Encoder as Scaffold" />
+  <title>VPIES: Variational Privileged-Information Encoder as Scaffold</title>
+  <meta name="description" content="VPIES: Variational Privileged-Information Encoder as Scaffold for robust legged locomotion with zero-privilege deployment." />
+  <meta property="og:title" content="VPIES: Variational Privileged-Information Encoder as Scaffold" />
   <meta property="og:description" content="Robust locomotion via variational scaffold + short–long encoders. Demos, paper, code, and results." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="assets/teaser.jpg" />
@@ -15,16 +15,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg: #0b1220;
-      --card:#0f172a;
-      --muted:#94a3b8;
-      --text:#e2e8f0;
-      --brand:#38bdf8;
-      --accent:#f59e0b;
-      --ring: 0 0 0 3px rgba(56,189,248,.35);
+      /* ===== Light theme palette ===== */
+      --bg: #fafafa;            /* page background */
+      --card:#ffffff;           /* card background */
+      --muted:#5b6673;          /* secondary text */
+      --text:#0f172a;           /* primary text (near-black) */
+      --brand:#0ea5e9;          /* accent / links */
+      --accent:#f59e0b;         /* warm accent (e.g., highlights) */
+      --border: rgba(15,23,42,.10);  /* subtle borders */
+      --ring: 0 0 0 3px rgba(14,165,233,.25); /* focus ring */
     }
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;}
+    html,body{
+      margin:0;padding:0;background:var(--bg);color:var(--text);
+      font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
     a{color:var(--brand);text-decoration:none}
     a:hover{text-decoration:underline}
     .container{max-width:1100px;margin:0 auto;padding:24px}
@@ -34,27 +40,48 @@
     .authors{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;font-size:15px}
     .aff{font-size:13px;color:var(--muted);margin-top:-6px}
     .badges{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-    .btn{display:inline-flex;align-items:center;gap:8px;background:#0b3551;color:#e0f2fe;border:1px solid #1f3d59;padding:10px 14px;border-radius:12px;font-weight:600}
-    .btn.secondary{background:#312e81;color:#e0e7ff;border-color:#4338ca}
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;
+      background:#e8f6fd;color:#05537a;border:1px solid #bfe7fa;
+      padding:10px 14px;border-radius:12px;font-weight:600
+    }
+    .btn.secondary{background:#eef2ff;color:#3730a3;border-color:#c7d2fe}
     .btn:hover{box-shadow:var(--ring)}
     .section{margin:32px 0}
     h2{font-size:26px;margin:8px 0 12px}
-    p{color:#cbd5e1;line-height:1.65}
-    .card{background:var(--card);border:1px solid rgba(148,163,184,.15);border-radius:16px;padding:18px}
+    p{color:#1f2937;line-height:1.65}
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:16px;padding:18px;
+      box-shadow:0 1px 2px rgba(0,0,0,.04)
+    }
     .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
-    .video-wrap{position:relative;overflow:hidden;border-radius:16px;border:1px solid rgba(148,163,184,.15)}
+    .video-wrap{position:relative;overflow:hidden;border-radius:16px;border:1px solid var(--border);background:#f6f7f9}
     .video-wrap video,.video-wrap iframe{width:100%;height:100%;display:block}
     .teaser{aspect-ratio:16/9}
-    .thumb{aspect-ratio:16/9}
-    .pill{display:inline-block;background:rgba(56,189,248,.12);color:#7dd3fc;border:1px solid rgba(56,189,248,.3);padding:3px 9px;border-radius:999px;font-size:12px;font-weight:600}
+    .thumb{aspect-ratio:16/9;background:#f3f4f6;object-fit:cover}
+    .pill{
+      display:inline-block;background:rgba(14,165,233,.10);color:#0369a1;
+      border:1px solid rgba(14,165,233,.25);padding:3px 9px;border-radius:999px;
+      font-size:12px;font-weight:600
+    }
     .kpi{display:flex;gap:16px;flex-wrap:wrap}
-    .kpi .item{background:#0c1b2b;border:1px solid rgba(56,189,248,.25);padding:10px 14px;border-radius:12px}
-    .paper{white-space:pre-wrap;background:#0a1322;border-radius:12px;padding:14px;border:1px solid rgba(148,163,184,.15);font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace;color:#cbd5e1}
-    footer{opacity:.7;text-align:center;padding:32px 0}
+    .kpi .item{
+      background:#f0f9ff;border:1px solid rgba(14,165,233,.25);
+      padding:10px 14px;border-radius:12px;color:#0c4a6e;font-weight:600
+    }
+    .paper{
+      white-space:pre-wrap;background:#f7f7fb;border-radius:12px;padding:14px;
+      border:1px solid var(--border);
+      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      color:#334155
+    }
+    footer{opacity:.85;text-align:center;padding:32px 0;color:#6b7280}
     .cols-2{grid-column:span 12}
     @media (min-width:900px){.cols-2{grid-column:span 6}}
     .figure{display:flex;flex-direction:column;gap:8px}
-    .cap{color:#9fb3c8;font-size:14px}
+    .cap{color:#64748b;font-size:14px}
     .split{display:grid;grid-template-columns:1fr;gap:14px}
     @media(min-width:960px){.split{grid-template-columns:1.2fr .8fr}}
     .mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
@@ -65,15 +92,15 @@
   <div class="container">
     <header class="hero">
       <div class="pill">Project Page</div>
-      <div class="title">VPIES: Variational Privileged‑Information Encoder as Scaffold</div>
-      <div class="subtitle">Zero‑privilege deployment via variational scaffold and short–long temporal encoders for robust legged locomotion.</div>
+      <div class="title">VPIES: Variational Privileged-Information Encoder as Scaffold</div>
+      <div class="subtitle">Zero-privilege deployment via variational scaffold and short–long temporal encoders for robust legged locomotion.</div>
       <div class="authors">
         <a href="#">First Author</a>, <a href="#">Second Author</a>, <a href="#">Third Author</a>, <a href="#">…</a>
       </div>
       <div class="aff">Affiliations • <span class="pill">2025</span></div>
       <div class="badges">
-        <a class="btn" href="assets/paper.pdf" target="_blank">📄 Paper (PDF)</a>
-        <a class="btn secondary" href="https://github.com/your-org/vpies" target="_blank">💻 Code</a>
+        <a class="btn" href="assets/paper.pdf" target="_blank" rel="noopener">📄 Paper (PDF)</a>
+        <a class="btn secondary" href="https://github.com/your-org/vpies" target="_blank" rel="noopener">💻 Code</a>
         <a class="btn" href="#video">🎥 Demo Video</a>
         <a class="btn" href="#bibtex">🔖 BibTeX</a>
       </div>
@@ -83,15 +110,15 @@
       <div class="figure">
         <div class="video-wrap teaser card">
           <!-- Replace src with your hosted mp4 or YouTube embed iframe -->
-          <video src="assets/demo.mp4" autoplay muted loop playsinline></video>
+          <video src="assets/demo.mp4" autoplay muted loop playsinline poster="assets/teaser.jpg"></video>
         </div>
         <div class="cap">Teaser: Robust locomotion across stairs, gravel, obstacles, and external pulls with <strong>zero privileged inputs at deployment</strong>.</div>
       </div>
       <div class="card">
         <h2>TL;DR</h2>
-        <p><strong>VPIES</strong> encodes privileged signals (elevation maps, external forces) into a KL‑regularized latent <em>only during training</em>, acting as an annealable scaffold. A signal‑driven KL schedule (S‑KL) couples information compression with policy utility. In parallel, <strong>short–long encoders</strong> summarize proprioceptive history (5/50 steps) and feed the actor directly for <em>direct adaptation</em>. At deployment, the privileged channel is removed (z=0), and the policy retains performance.</p>
+        <p><strong>VPIES</strong> encodes privileged signals (elevation maps, external forces) into a KL-regularized latent <em>only during training</em>, acting as an annealable scaffold. A signal-driven KL schedule (S-KL) couples information compression with policy utility. In parallel, <strong>short–long encoders</strong> summarize proprioceptive history (5/50 steps) and feed the actor directly for <em>direct adaptation</em>. At deployment, the privileged channel is removed (z=0), and the policy retains performance.</p>
         <div class="kpi">
-          <div class="item">Zero‑privilege deployment</div>
+          <div class="item">Zero-privilege deployment</div>
           <div class="item">Faster convergence</div>
           <div class="item">Stronger OOD robustness</div>
         </div>
@@ -103,12 +130,12 @@
       <div class="grid">
         <div class="cols-2 card">
           <div class="figure">
-            <img class="thumb" src="assets/method.png" alt="Method diagram" />
-            <div class="cap">Training: privileged info → variational latent z; short–long encoders → temporal embeddings; actor consumes [h<sub>s</sub>, h<sub>l</sub>, z, o, \hat v]. Deployment: set z=0.</div>
+            <img class="thumb" src="assets/method.png" alt="Method diagram" loading="lazy" />
+            <div class="cap">Training: privileged info → variational latent z; short–long encoders → temporal embeddings; actor consumes [h<sub>s</sub>, h<sub>l</sub>, z, o, v̂]. Deployment: set z=0.</div>
           </div>
         </div>
         <div class="cols-2 card">
-          <h3>Adaptive KL (S‑KL)</h3>
+          <h3>Adaptive KL (S-KL)</h3>
           <p>We adjust \(\beta\) using performance gate \(\Delta J\) and batch KL versus a decaying target \(\tau_{\mathrm{KL}}\). If utility improves or KL is above target, increase \(\beta\) (faster scaffold removal); otherwise decrease it to provide more guidance.</p>
           <pre class="paper">β<sub>k+1</sub> = clip( β<sub>k</sub> + η<sub>J</sub>·tanh(ΔJ/s) + η<sub>KL</sub>(KL<sub>avg</sub> − τ<sub>KL</sub>(k)) )</pre>
         </div>
@@ -119,18 +146,18 @@
       <h2>Results</h2>
       <div class="grid">
         <div class="cols-2 card">
-          <img class="thumb" src="assets/curves.png" alt="Learning curves" />
+          <img class="thumb" src="assets/curves.png" alt="Learning curves" loading="lazy" />
           <div class="cap">Learning curves under fair settings; VPIES converges faster with higher asymptote.</div>
         </div>
         <div class="cols-2 card">
-          <img class="thumb" src="assets/heatmap.png" alt="Disturbance robustness" />
+          <img class="thumb" src="assets/heatmap.png" alt="Disturbance robustness" loading="lazy" />
           <div class="cap">Disturbance robustness: higher survival rates under random pushes due to stochastic latent sampling.</div>
         </div>
       </div>
       <div class="mini-grid" style="margin-top:12px">
-        <img class="card" src="assets/gallery1.jpg" alt="obstacles" />
-        <img class="card" src="assets/gallery2.jpg" alt="stairs" />
-        <img class="card" src="assets/gallery3.jpg" alt="gravel" />
+        <img class="card" src="assets/gallery1.jpg" alt="obstacles" loading="lazy" />
+        <img class="card" src="assets/gallery2.jpg" alt="stairs" loading="lazy" />
+        <img class="card" src="assets/gallery3.jpg" alt="gravel" loading="lazy" />
       </div>
     </section>
 
@@ -146,7 +173,7 @@
     </section>
 
     <footer>
-      © 2025 Your Lab / Group. Design: single-file, mobile-friendly. Replace assets in <code>assets/</code> and publish via GitHub Pages.
+      © 2025 Your Lab / Group. Single-file, mobile-friendly. Replace assets in <code>assets/</code> and publish via GitHub Pages.
     </footer>
   </div>
 </body>
