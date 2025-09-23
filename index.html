@@ -56,6 +56,30 @@
       border-radius:16px;padding:18px;
       box-shadow:0 1px 2px rgba(0,0,0,.04)
     }
+    /* ===== Video & Method tuning ===== */
+    /* 让视频容器保持 16:9，边角圆角、边框与你现有风格一致 */
+    .video-wrap.teaser {
+    aspect-ratio: 16 / 9;            /* 现代浏览器支持 */
+    background: #f6f7f9;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    }
+    .video-wrap video { width: 100%; height: 100%; display: block; }
+
+    /* 方法图：自适应等比缩放 + 最大宽度限制，不撑破版心 */
+    .method-figure { display: flex; flex-direction: column; gap: 8px; }
+    .method-img {
+    width: 100%;
+    height: auto;
+    max-width: 980px;                /* 设定一个合理上限，你也可改为 900/1100 */
+    margin: 0 auto;                  /* 居中 */
+    display: block;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: #fff;
+    }
+
     .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
     .video-wrap{position:relative;overflow:hidden;border-radius:16px;border:1px solid var(--border);background:#f6f7f9}
     .video-wrap video,.video-wrap iframe{width:100%;height:100%;display:block}
@@ -123,21 +147,26 @@
 
     <!-- ============== Demo 视频（单独一栏） ============== -->
     <section class="section" id="video">
-      <div class="figure">
-       <div class="video-wrap teaser card">
-        <video
-            controls                      
-            preload="metadata"           
-            playsinline                  
-            muted                         
-            poster="assets/teaser.jpg"    >
-            <source src="assets/demo.mp4" type="video/mp4">     <!-- H.264/AAC -->
-            <source src="assets/demo.webm" type="video/webm">   <!-- VP9/Opus 回退 -->
-            您的浏览器不支持 HTML5 视频。
-        </video>
+        <div class="figure">
+            <div class="video-wrap teaser card">
+            <video
+                controls
+                preload="metadata"
+                playsinline
+                muted
+                poster="assets/fengmian.jpg">
+                <source src="assets/demo.mp4" type="video/mp4">      <!-- H.264/AAC -->
+                <source src="assets/demo.webm" type="video/webm">     <!-- 可选回退：如无可删除 -->
+                您的浏览器不支持 HTML5 视频。
+            </video>
+            </div>
+            <div class="cap">
+            Teaser: Robust locomotion across stairs, gravel, obstacles, and external pulls with
+            <strong>zero privileged inputs at deployment</strong>.
+            </div>
         </div>
-      </div>
     </section>
+
 
     <!-- ============== Abstract（紧跟视频） ============== -->
     <section class="section">
@@ -160,27 +189,30 @@
     </section>
 
     <!-- ============== Method Section ============== -->
-    <section class="section">
+    <!-- ============== Method Section ============== -->
+    <section class="section" id="method">
         <h2>Training Method</h2>
-        <div class="card figure">
-            <!-- 方法框图 -->
-            <img class="thumb" src="assets/scaffolder.png" alt="VPIES Method Diagram" loading="lazy" />
-            <div class="cap">
-            VPIES as a training-time scaffold for actor-side exploration.
-            </div>
+        <div class="card method-figure">
+            <!-- 方法框图：推荐先把 scaffold.pdf 转成 webp/png/jpg 放到 assets/ -->
+            <!-- 若你已有多尺寸版本，可使用 srcset；这里给一个简单版示例 -->
+            <img
+            class="method-img"
+            src="assets/scaffold_960.webp"          <!-- 没有就换成 scaffold.png/jpg -->
+            alt="VPIES Method Diagram (training-time scaffold)">
+            <div class="cap">VPIES method diagram</div>
         </div>
+
         <p>
-            <strong>VPIES</strong> leverages privileged states <em>s<sub>t</sub></em> 
-            <span style="color:#dc2626">(red; simulation only)</span>, which are encoded into a variational latent 
-            <em>z<sub>t</sub></em> and concatenated with proprioceptive history features from the short/long encoders 
-            <span style="color:#2563eb">(blue; available in both simulation and the real world)</span>. 
-            The actor is trained with <em>z<sub>t</sub></em> plus proprioception to enhance exploration. 
-            During deployment, the scaffold module 
-            <span style="color:#f59e0b">(yellow block)</span> is removed, and the policy runs privilege-free, 
+            <strong>VPIES</strong> as a training-time scaffold for actor-side exploration.
+            Privileged states <em>s<sub>t</sub></em>
+            <span style="color:#dc2626">(red; simulation only)</span> are encoded into a variational latent
+            <em>z<sub>t</sub></em> and concatenated with proprioceptive history features from the short/long encoders
+            <span style="color:#2563eb">(blue; available in both simulation and the real world)</span>.
+            The actor is trained with <em>z<sub>t</sub></em> plus proprioception. During deployment, the scaffold module
+            <span style="color:#f59e0b">(yellow block)</span> is removed and the policy runs privilege-free,
             enabling <strong>zero-shot sim-to-real transfer</strong>.
         </p>
     </section>
-
 
     <!-- ============== Results（示例） ============== -->
     <section class="section">
