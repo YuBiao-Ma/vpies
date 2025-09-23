@@ -155,8 +155,8 @@
                 playsinline
                 muted
                 poster="assets/000.jpg">
-                <source src="assets/demo.mp4" type="video/mp4">      <!-- H.264/AAC -->
-                <source src="assets/demo.webm" type="video/webm">     <!-- 可选回退：如无可删除 -->
+                <source src="assets/demo01.mp4" type="video/mp4">      <!-- H.264/AAC -->
+                <source src="assets/demo01.webm" type="video/webm">     <!-- 可选回退：如无可删除 -->
                 您的浏览器不支持 HTML5 视频。
             </video>
             </div>
@@ -189,7 +189,6 @@
     </section>
 
     <!-- ============== Method Section ============== -->
-    <!-- ============== Method Section ============== -->
     <section class="section" id="method">
         <h2>Training Method</h2>
         <div class="card method-figure">
@@ -209,7 +208,7 @@
             <em>z<sub>t</sub></em> and concatenated with proprioceptive history features from the short/long encoders
             <span style="color:#2563eb">(blue; available in both simulation and the real world)</span>.
             The actor is trained with <em>z<sub>t</sub></em> plus proprioception. During deployment, the scaffold module
-            <span style="color:#f59e0b">(yellow block)</span> is removed and the policy runs privilege-free,
+            is removed and the policy runs privilege-free,
             enabling <strong>zero-shot sim-to-real transfer</strong>.
         </p>
     </section>
