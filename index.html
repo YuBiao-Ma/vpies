@@ -213,25 +213,90 @@
         </p>
     </section>
 
-    <!-- ============== Results（示例） ============== -->
-    <section class="section">
-      <h2>Results</h2>
-      <div class="grid">
-        <div class="cols-2 card">
-          <img class="thumb" src="assets/curves.png" alt="Learning curves" loading="lazy" />
-          <div class="cap">Learning curves under fair settings; VPIES converges faster with higher asymptote.</div>
+    <!-- ============== Results ============== -->
+    <section class="section" id="results">
+        <h2>Results</h2>
+
+        <!-- —— Humanoid robot —— -->
+        <h3 style="margin-top:6px;">Humanoid Robot</h3>
+
+        <!-- 每个视频单独一行 -->
+        <div class="card video-wrap teaser" style="margin-bottom:12px;">
+            <video controls preload="metadata" playsinline>
+            <source src="assets/g11.mp4" type="video/mp4">
+            您的浏览器不支持 HTML5 视频。
+            </video>
         </div>
-        <div class="cols-2 card">
-          <img class="thumb" src="assets/heatmap.png" alt="Disturbance robustness" loading="lazy" />
-          <div class="cap">Disturbance robustness: higher survival rates under random pushes due to stochastic latent sampling.</div>
+        <div class="cap" style="margin-top:-6px; margin-bottom:18px;">
+            Stairs &rarr; Down-slope
         </div>
-      </div>
-      <div class="mini-grid" style="margin-top:12px">
-        <img class="card" src="assets/gallery1.jpg" alt="obstacles" loading="lazy" />
-        <img class="card" src="assets/gallery2.jpg" alt="stairs" loading="lazy" />
-        <img class="card" src="assets/gallery3.jpg" alt="gravel" loading="lazy" />
-      </div>
+
+        <div class="card video-wrap teaser" style="margin-bottom:12px;">
+            <video controls preload="metadata" playsinline>
+            <source src="assets/g12.mp4" type="video/mp4">
+            您的浏览器不支持 HTML5 视频。
+            </video>
+        </div>
+        <div class="cap" style="margin-top:-6px; margin-bottom:18px;">
+            Up-slope &rarr; Down-stairs
+        </div>
+
+        <div class="card video-wrap teaser" style="margin-bottom:12px;">
+            <video controls preload="metadata" playsinline>
+            <source src="assets/g13.mp4" type="video/mp4">
+            您的浏览器不支持 HTML5 视频。
+            </video>
+        </div>
+        <div class="cap" style="margin-top:-6px; margin-bottom:24px;">
+            Walking on gravel ground
+        </div>
+
+        <!-- —— Quadruped robot —— -->
+        <h3>Quadruped Robot</h3>
+
+        <!-- 第一行：两个视频并排 -->
+        <div class="grid" style="margin-bottom:12px;">
+            <div class="cols-2 card video-wrap teaser">
+            <video controls preload="metadata" playsinline>
+                <source src="assets/go22.mp4" type="video/mp4">
+                您的浏览器不支持 HTML5 视频。
+            </video>
+            </div>
+            <div class="cols-2 card video-wrap teaser">
+            <video controls preload="metadata" playsinline>
+                <source src="assets/go23.mp4" type="video/mp4">
+                您的浏览器不支持 HTML5 视频。
+            </video>
+            </div>
+        </div>
+        <div class="grid" style="margin-top:-6px; margin-bottom:18px;">
+            <div class="cols-2 cap">High-platform jump (clip 1)</div>
+            <div class="cols-2 cap">High-platform jump (clip 2)</div>
+        </div>
+
+        <!-- 第二行：一个视频单独一行 -->
+        <div class="card video-wrap teaser" style="margin-bottom:12px;">
+            <video controls preload="metadata" playsinline>
+            <source src="assets/go21.mp4" type="video/mp4">
+            您的浏览器不支持 HTML5 视频。
+            </video>
+        </div>
+        <div class="cap" style="margin-top:-6px; margin-bottom:18px;">
+            Obstacle traversal
+        </div>
+
+        <!-- 第三行：一个视频单独一行 -->
+        <div class="card video-wrap teaser" style="margin-bottom:12px;">
+            <video controls preload="metadata" playsinline>
+            <source src="assets/go24.mp4" type="video/mp4">
+            您的浏览器不支持 HTML5 视频。
+            </video>
+        </div>
+        <div class="cap" style="margin-top:-6px;">
+            Robustness tests
+        </div>
     </section>
+
 
     <!-- ============== BibTeX ============== -->
     <section class="section card" id="bibtex">
