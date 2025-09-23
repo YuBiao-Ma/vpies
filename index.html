@@ -86,6 +86,21 @@
     @media(min-width:960px){.split{grid-template-columns:1.2fr .8fr}}
     .mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
     @media(max-width:700px){.mini-grid{grid-template-columns:1fr}}
+
+    /* ---- Abstract 样式 ---- */
+    .section-title {
+      display:flex; align-items:center; gap:10px;
+      font-size:24px; font-weight:800; margin:0 0 10px;
+    }
+    .section-title .pin {font-size:22px}
+    .abstract-card{
+      background:var(--card); border:1px solid var(--border);
+      border-radius:16px; padding:18px; box-shadow:0 1px 2px rgba(0,0,0,.04);
+    }
+    .abstract-text{
+      color:#1f2937; line-height:1.75; font-size:16px;
+      text-align:justify; hyphens:auto;
+    }
   </style>
 </head>
 <body>
@@ -106,25 +121,41 @@
       </div>
     </header>
 
-    <section class="section split" id="video">
+    <!-- ============== Demo 视频（单独一栏） ============== -->
+    <section class="section" id="video">
       <div class="figure">
         <div class="video-wrap teaser card">
-          <!-- Replace src with your hosted mp4 or YouTube embed iframe -->
+          <!-- 如需控制条：把 autoplay muted loop 改为 controls -->
           <video src="assets/demo.mp4" autoplay muted loop playsinline poster="assets/teaser.jpg"></video>
         </div>
-        <div class="cap">Teaser: Robust locomotion across stairs, gravel, obstacles, and external pulls with <strong>zero privileged inputs at deployment</strong>.</div>
-      </div>
-      <div class="card">
-        <h2>TL;DR</h2>
-        <p><strong>VPIES</strong> encodes privileged signals (elevation maps, external forces) into a KL-regularized latent <em>only during training</em>, acting as an annealable scaffold. A signal-driven KL schedule (S-KL) couples information compression with policy utility. In parallel, <strong>short–long encoders</strong> summarize proprioceptive history (5/50 steps) and feed the actor directly for <em>direct adaptation</em>. At deployment, the privileged channel is removed (z=0), and the policy retains performance.</p>
-        <div class="kpi">
-          <div class="item">Zero-privilege deployment</div>
-          <div class="item">Faster convergence</div>
-          <div class="item">Stronger OOD robustness</div>
+        <div class="cap">
+          Teaser: Robust locomotion across stairs, gravel, obstacles, and external pulls with
+          <strong>zero privileged inputs at deployment</strong>.
         </div>
       </div>
     </section>
 
+    <!-- ============== Abstract（紧跟视频） ============== -->
+    <section class="section">
+      <div class="abstract-card">
+        <h2 class="section-title"><span class="pin">📌</span>Abstract</h2>
+        <p class="abstract-text">
+          In complex environments under partial observability, legged robots, especially humanoids, remain significant challenges.
+          Legged locomotion via reinforcement learning is often framed as a teacher-student paradigm, where a proprioceptive
+          student policy imitates a teacher trained with privileged inputs. While effective for bootstrapping, this pipeline
+          suffers from representation misalignment, covariate shift, and weak deployable adaptation, which limits real-world
+          generalization. Inspired by human learning, where teachers provide scaffold that are gradually faded rather than
+          demanding pure imitation, we propose Variational Privileged-Information Encoder as Scaffold (VPIES), a single-stage
+          RL framework that learns temporally structured proprioceptive representations with short-long encoders while encoding
+          privileged states into a KL-regularized latent that serves as a training-time scaffold. An adaptive KL schedule
+          gradually removes dependence on privilege, enabling zero-privilege deployment by replacing the latent with a zero
+          vector. In simulation, VPIES reduces velocity-tracking error by approximately 20% and improves out-of-distribution
+          robustness by approximately 30% on quadrupeds, and yields stable, agile behaviors on humanoids in complex terrains.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============== Method Overview（可按需保留/修改） ============== -->
     <section class="section">
       <h2>Method Overview</h2>
       <div class="grid">
@@ -142,6 +173,7 @@
       </div>
     </section>
 
+    <!-- ============== Results（示例） ============== -->
     <section class="section">
       <h2>Results</h2>
       <div class="grid">
@@ -161,6 +193,7 @@
       </div>
     </section>
 
+    <!-- ============== BibTeX ============== -->
     <section class="section card" id="bibtex">
       <h2>Citation</h2>
       <pre class="paper">@inproceedings{YourVPIES2025,
