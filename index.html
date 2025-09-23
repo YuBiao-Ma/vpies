@@ -124,13 +124,17 @@
     <!-- ============== Demo 视频（单独一栏） ============== -->
     <section class="section" id="video">
       <div class="figure">
-        <div class="video-wrap teaser card">
-          <!-- 如需控制条：把 autoplay muted loop 改为 controls -->
-          <video src="assets/demo.mp4" autoplay muted loop playsinline poster="assets/teaser.jpg"></video>
-        </div>
-        <div class="cap">
-          Teaser: Robust locomotion across stairs, gravel, obstacles, and external pulls with
-          <strong>zero privileged inputs at deployment</strong>.
+       <div class="video-wrap teaser card">
+        <video
+            controls                      
+            preload="metadata"           
+            playsinline                  
+            muted                         
+            poster="assets/teaser.jpg"    >
+            <source src="assets/demo.mp4" type="video/mp4">     <!-- H.264/AAC -->
+            <source src="assets/demo.webm" type="video/webm">   <!-- VP9/Opus 回退 -->
+            您的浏览器不支持 HTML5 视频。
+        </video>
         </div>
       </div>
     </section>
