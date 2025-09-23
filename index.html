@@ -159,23 +159,28 @@
       </div>
     </section>
 
-    <!-- ============== Method Overview（可按需保留/修改） ============== -->
+    <!-- ============== Method Section ============== -->
     <section class="section">
-      <h2>Method Overview</h2>
-      <div class="grid">
-        <div class="cols-2 card">
-          <div class="figure">
-            <img class="thumb" src="assets/method.png" alt="Method diagram" loading="lazy" />
-            <div class="cap">Training: privileged info → variational latent z; short–long encoders → temporal embeddings; actor consumes [h<sub>s</sub>, h<sub>l</sub>, z, o, v̂]. Deployment: set z=0.</div>
-          </div>
+        <h2>Training Method</h2>
+        <div class="card figure">
+            <!-- 方法框图 -->
+            <img class="thumb" src="assets/scaffold.pdf" alt="VPIES Method Diagram" loading="lazy" />
+            <div class="cap">
+            VPIES as a training-time scaffold for actor-side exploration.
+            </div>
         </div>
-        <div class="cols-2 card">
-          <h3>Adaptive KL (S-KL)</h3>
-          <p>We adjust \(\beta\) using performance gate \(\Delta J\) and batch KL versus a decaying target \(\tau_{\mathrm{KL}}\). If utility improves or KL is above target, increase \(\beta\) (faster scaffold removal); otherwise decrease it to provide more guidance.</p>
-          <pre class="paper">β<sub>k+1</sub> = clip( β<sub>k</sub> + η<sub>J</sub>·tanh(ΔJ/s) + η<sub>KL</sub>(KL<sub>avg</sub> − τ<sub>KL</sub>(k)) )</pre>
-        </div>
-      </div>
+        <p>
+            <strong>VPIES</strong> leverages privileged states <em>s<sub>t</sub></em> 
+            <span style="color:#dc2626">(red; simulation only)</span>, which are encoded into a variational latent 
+            <em>z<sub>t</sub></em> and concatenated with proprioceptive history features from the short/long encoders 
+            <span style="color:#2563eb">(blue; available in both simulation and the real world)</span>. 
+            The actor is trained with <em>z<sub>t</sub></em> plus proprioception to enhance exploration. 
+            During deployment, the scaffold module 
+            <span style="color:#f59e0b">(yellow block)</span> is removed, and the policy runs privilege-free, 
+            enabling <strong>zero-shot sim-to-real transfer</strong>.
+        </p>
     </section>
+
 
     <!-- ============== Results（示例） ============== -->
     <section class="section">
