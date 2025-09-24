@@ -15,127 +15,98 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      /* ===== Light theme palette ===== */
-      --bg: #fafafa;            /* page background */
-      --card:#ffffff;           /* card background */
-      --muted:#5b6673;          /* secondary text */
-      --text:#0f172a;           /* primary text (near-black) */
-      --brand:#0ea5e9;          /* accent / links */
-      --accent:#f59e0b;         /* warm accent (e.g., highlights) */
-      --border: rgba(15,23,42,.10);  /* subtle borders */
-      --ring: 0 0 0 3px rgba(14,165,233,.25); /* focus ring */
+      --bg:#fafafa; --card:#ffffff; --muted:#5b6673; --text:#0f172a;
+      --brand:#0ea5e9; --accent:#f59e0b; --border:rgba(15,23,42,.10);
+      --ring:0 0 0 3px rgba(14,165,233,.25);
     }
     *{box-sizing:border-box}
     html,body{
-      margin:0;padding:0;background:var(--bg);color:var(--text);
+      margin:0; padding:0; background:var(--bg); color:var(--text);
       font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
       -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
     }
-    a{color:var(--brand);text-decoration:none}
+    a{color:var(--brand); text-decoration:none}
     a:hover{text-decoration:underline}
-    .container{max-width:1100px;margin:0 auto;padding:24px}
-    header.hero{display:flex;flex-direction:column;gap:24px;align-items:center;text-align:center;padding:48px 0}
-    .title{font-size:clamp(28px,4vw,48px);line-height:1.05;font-weight:800;letter-spacing:.2px}
-    .subtitle{font-size:clamp(16px,2vw,22px);color:var(--muted)}
-    .authors{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;font-size:15px}
-    .aff{font-size:13px;color:var(--muted);margin-top:-6px}
-    .badges{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+
+    /* ====== 方案A：加宽与留白优化 ====== */
+    .container{max-width:1280px; margin:0 auto; padding:24px}          /* 1100 -> 1280 */
+    header.hero{display:flex; flex-direction:column; gap:24px; align-items:center; text-align:center; padding:48px 0}
+    .title{font-size:clamp(32px, 5vw, 64px); line-height:1.05; font-weight:800; letter-spacing:.2px}  /* 上限 64px */
+    .subtitle{font-size:clamp(16px,2vw,22px); color:var(--muted)}
+    .authors{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; font-size:15px}
+    .aff{font-size:13px; color:var(--muted); margin-top:-6px}
+    .badges{display:flex; flex-wrap:wrap; gap:10px; justify-content:center}
+
     .btn{
-      display:inline-flex;align-items:center;gap:8px;
-      background:#e8f6fd;color:#05537a;border:1px solid #bfe7fa;
-      padding:10px 14px;border-radius:12px;font-weight:600
+      display:inline-flex; align-items:center; gap:8px;
+      background:#e8f6fd; color:#05537a; border:1px solid #bfe7fa;
+      padding:10px 14px; border-radius:12px; font-weight:600
     }
-    .btn.secondary{background:#eef2ff;color:#3730a3;border-color:#c7d2fe}
+    .btn.secondary{background:#eef2ff; color:#3730a3; border-color:#c7d2fe}
     .btn:hover{box-shadow:var(--ring)}
+
     .section{margin:32px 0}
-    h2{font-size:26px;margin:8px 0 12px}
-    p{color:#1f2937;line-height:1.65}
+    h2{font-size:26px; margin:8px 0 12px}
+    p{color:#1f2937; line-height:1.65}
+
     .card{
       background:var(--card);
       border:1px solid var(--border);
-      border-radius:16px;padding:18px;
+      border-radius:16px; padding:16px;                            /* 18px -> 16px */
       box-shadow:0 1px 2px rgba(0,0,0,.04)
     }
-    /* ===== Video & Method tuning ===== */
-    /* 让视频容器保持 16:9，边角圆角、边框与你现有风格一致 */
-    .video-wrap.teaser {
-    aspect-ratio: 16 / 9;            /* 现代浏览器支持 */
-    background: #f6f7f9;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-    }
+    .card.flush{padding:0}                                          /* 并排视频更大 */
 
-    /* 让并排视频占满列：去掉卡片内边距 */
-    .card.flush { padding: 0; }
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:14px} /* gap 16 -> 14 */
+    .grid.tight{gap:10px}                                           /* 并排视频更紧凑 */
 
-    /* 这行的两列间距更小一些，让可用宽度更大 */
-    .grid.tight { gap: 10px; }
+    .video-wrap{position:relative; overflow:hidden; border-radius:16px; border:1px solid var(--border); background:#f6f7f9}
+    .video-wrap video,.video-wrap iframe{width:100%; height:100%; display:block}
+    .video-wrap.teaser{aspect-ratio:16/8}                           /* 16:9 -> 16:8 更高更满 */
+    .thumb{aspect-ratio:16/9; background:#f3f4f6; object-fit:cover}
 
-    /* 保持 16:9，确保填满容器 */
-    .video-wrap.teaser video { width: 100%; height: 100%; display: block; }
-
-
-    /* 方法图：自适应等比缩放 + 最大宽度限制，不撑破版心 */
-    .method-figure { display: flex; flex-direction: column; gap: 8px; }
-    .method-img {
-    width: 100%;
-    height: auto;
-    max-width: 980px;                /* 设定一个合理上限，你也可改为 900/1100 */
-    margin: 0 auto;                  /* 居中 */
-    display: block;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    background: #fff;
-    }
-
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
-    .video-wrap{position:relative;overflow:hidden;border-radius:16px;border:1px solid var(--border);background:#f6f7f9}
-    .video-wrap video,.video-wrap iframe{width:100%;height:100%;display:block}
-    .teaser{aspect-ratio:16/9}
-    .thumb{aspect-ratio:16/9;background:#f3f4f6;object-fit:cover}
     .pill{
-      display:inline-block;background:rgba(14,165,233,.10);color:#0369a1;
-      border:1px solid rgba(14,165,233,.25);padding:3px 9px;border-radius:999px;
-      font-size:12px;font-weight:600
+      display:inline-block; background:rgba(14,165,233,.10); color:#0369a1;
+      border:1px solid rgba(14,165,233,.25); padding:3px 9px; border-radius:999px;
+      font-size:12px; font-weight:600
     }
-    .kpi{display:flex;gap:16px;flex-wrap:wrap}
+    .kpi{display:flex; gap:16px; flex-wrap:wrap}
     .kpi .item{
-      background:#f0f9ff;border:1px solid rgba(14,165,233,.25);
-      padding:10px 14px;border-radius:12px;color:#0c4a6e;font-weight:600
+      background:#f0f9ff; border:1px solid rgba(14,165,233,.25);
+      padding:10px 14px; border-radius:12px; color:#0c4a6e; font-weight:600
     }
     .paper{
-      white-space:pre-wrap;background:#f7f7fb;border-radius:12px;padding:14px;
+      white-space:pre-wrap; background:#f7f7fb; border-radius:12px; padding:14px;
       border:1px solid var(--border);
       font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
       color:#334155
     }
-    footer{opacity:.85;text-align:center;padding:32px 0;color:#6b7280}
+    footer{opacity:.85; text-align:center; padding:32px 0; color:#6b7280}
+
     .cols-2{grid-column:span 12}
     @media (min-width:900px){.cols-2{grid-column:span 6}}
-    .figure{display:flex;flex-direction:column;gap:8px}
-    .cap{color:#64748b;font-size:14px}
-    .split{display:grid;grid-template-columns:1fr;gap:14px}
+    .figure{display:flex; flex-direction:column; gap:8px}
+    .cap{color:#64748b; font-size:14px}
+    .split{display:grid; grid-template-columns:1fr; gap:14px}
     @media(min-width:960px){.split{grid-template-columns:1.2fr .8fr}}
-    .mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .mini-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
     @media(max-width:700px){.mini-grid{grid-template-columns:1fr}}
 
-    /* ---- Abstract 样式 ---- */
-    .section-title {
-      display:flex; align-items:center; gap:10px;
-      font-size:24px; font-weight:800; margin:0 0 10px;
-    }
-    .section-title .pin {font-size:22px}
-    .abstract-card{
-      background:var(--card); border:1px solid var(--border);
-      border-radius:16px; padding:18px; box-shadow:0 1px 2px rgba(0,0,0,.04);
-    }
-    .abstract-text{
-      color:#1f2937; line-height:1.75; font-size:16px;
-      text-align:justify; hyphens:auto;
+    /* ---- Abstract ---- */
+    .section-title{display:flex; align-items:center; gap:10px; font-size:24px; font-weight:800; margin:0 0 10px}
+    .section-title .pin{font-size:22px}
+    .abstract-card{background:var(--card); border:1px solid var(--border); border-radius:16px; padding:18px; box-shadow:0 1px 2px rgba(0,0,0,.04)}
+    .abstract-text{color:#1f2937; line-height:1.75; font-size:16px; text-align:justify; hyphens:auto}
+
+    /* ---- Method figure ---- */
+    .method-figure{display:flex; flex-direction:column; gap:8px}
+    .method-img{
+      width:100%; height:auto; max-width:1100px;                   /* 放宽展示上限 */
+      margin:0 auto; display:block; border-radius:12px; border:1px solid var(--border); background:#fff;
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <header class="hero">
