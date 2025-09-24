@@ -124,10 +124,21 @@
     /* 适度降低视频高度，整体更疏朗（如需更大可以改回 16/8） */
     #results .video-wrap.teaser { aspect-ratio: 16 / 9; }  /* 从 16/8 调回 16/9 */
 
+    /* 放到 <style> 的末尾，覆盖全局的 .cap */
+    #results .cap{
+      font-size:16px;        /* 或 18px 更醒目 */
+      color:#334155;         /* 更深一点的灰蓝 */
+      font-weight:600;       /* 半粗，标题感更强 */
+      text-align:center;     /* 并排两列居中（可选） */
+      margin:6px 0 24px !important;  /* 覆盖你内联的 -6px 和 18px（可选） */
+    }
+
+
     /* 移动端略微收紧，避免空白过多 */
     @media (max-width: 700px){
       #results .grid.tight { gap: 14px; }
       #results .cap { margin-bottom: 18px !important; }
+
     }
 
   </style>
