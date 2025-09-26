@@ -208,9 +208,11 @@
         <p class="abstract-text">
           In complex environments under partial observability, legged robots, especially humanoids, remain significant challenges.
           Legged locomotion via reinforcement learning is often framed as a teacher-student paradigm, where a proprioceptive
-          student policy imitates a teacher trained with privileged inputs. While effective for bootstrapping, this pipeline
-          suffers from representation misalignment, covariate shift, and weak deployable adaptation, which limits real-world
-          generalization. Inspired by human learning, where teachers provide scaffold that are gradually faded rather than
+          student policy imitates a teacher trained with privileged inputs. 
+          While effective for bootstrapping, 
+          this pipeline can induce representation mismatch and covariate shift, 
+          leaving a gap at deployment that ultimately constrains real-world generalization. 
+          Inspired by human learning, where teachers provide scaffold that are gradually faded rather than
           demanding pure imitation, we propose Variational Privileged-Information Encoder as Scaffold (VPIES), a single-stage
           RL framework that learns temporally structured proprioceptive representations with short-long encoders while encoding
           privileged states into a KL-regularized latent that serves as a training-time scaffold. An adaptive KL schedule
